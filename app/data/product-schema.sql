@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS Products
+( 
+    product_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    name TEXT NOT NULL , 
+    price DECIMAL NOT NULL
+);

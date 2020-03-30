@@ -1,0 +1,21 @@
+{
+    "title": "Product",
+    "type": "object",
+    "properties": {
+        "product_id": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "price": {
+            "type": "number",
+            "minimum": 0
+        }
+    },
+    "required": [
+        "product_id",
+        "name",
+        "price"
+    ]
+}
