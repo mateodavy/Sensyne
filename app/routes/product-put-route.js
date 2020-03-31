@@ -1,57 +1,44 @@
 module.exports = function (app, db) {
     
     // Update a product
-    // http://localhost:4300/api/product
+    // http://localhost:5000/v1/product
     // Sending a JSON body:
     // {
     //     "id": "12",            
-    //     "name": "ExampleProductName",
-    //     "description": "Example product description",
-    //     "price": 2.00,
-    //     "currency": "EUR" 
+    //     "name": "ExampleProductName"
+    //     "price": 2.00, 
     // }
 
     // or an array of products:
     // [
     //     {...},{...}
     // ]
-    app.put('/api/product/', (req, res) => {
+    app.put('/v1/product/:id', (req, res) => {
         res.setHeader("Access-Control-Allow-Origin", "*");
 
-         var data = req.body;
+        var data = req.body;
+
+//        console.warn("PUT: data: " + data);
          
-         if((data.constructor === Array))
-            processProducts(req, res, db);
-         else
-            processProduct(req, res, db);
+        updateProduct(req.params.id, data, res, db);
     });
 };
-
-function processProducts(req, res, db){
-    for (var prod of req.body) {
-        updateProduct(prod, res, db);
-    }
-}
-
-function processProduct(req, res, db){
-    validateRequest(req, res);
-    updateProduct(req.body, res, db);
-}
 
 function checkIfExist(){
     // TODO: check business
 }
 
-function updateProduct(product, res, db){
+function updateProduct(id, data, res, db){
     checkIfExist();
 
-    var name = product.name;
-    var price = product.price;
-    var id = product.id;
+    var name = data.name;
+    var price = data.price;
 
-    var sql = `update Products
-            set name = ?, price = ?
-            where id = ?;`;
+    var sql = `UPDATE products
+            SET name = ?, price = ?
+            WHERE product_id = ?;`;
+
+//    console.warn("PUT: name: " + name + " - price: " + price);
 
     var values = [name, price, id];
 
@@ -62,7 +49,7 @@ function updateProduct(product, res, db){
                 res.status(500).send(err);
             }
             else
-                res.send();
+                res.status(200).send();
         });
     });
 }

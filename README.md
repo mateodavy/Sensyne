@@ -10,7 +10,7 @@ $ npm install
 $ npm run dev
 ```
 
-It will be running on port 4300
+It will be running on port 5000
 
 ------------
 
@@ -19,7 +19,7 @@ It will be running on port 4300
 ### POST
 * **Add new product:**
 ```
-http://localhost:4300/api/product
+http://localhost:4300/v1/product
 ```
 Sending a JSON body:
 ```javascript
@@ -40,7 +40,7 @@ or an array of products:
 ### PUT
 * **Update a product:**
 ```
-http://localhost:4300/api/product/{product_id}
+http://localhost:4300/v1/product/{product_id}
 ```
 Sending a JSON body: **ID is the only MANDATORY**
 ```javascript
@@ -62,7 +62,7 @@ or an array of products:
 ### DELETE
 * **Delete a product:**
 ```
-http://localhost:4300/api/product/{product_id}
+http://localhost:4300/v1/product/{product_id}
 ```
 Sending a JSON body: **ID is the only MANDATORY**
 ```javascript
@@ -79,15 +79,15 @@ Sending a JSON body: **ID is the only MANDATORY**
 ### GET
 * **Load products by ID:**
 ```
-http://localhost:4300/api/product/{product_id}
+http://localhost:4300/v1/product/{product_id}
 ```
-example: http://localhost:4300/api/product/2
+example: http://localhost:4300/v1/product/2
 
 _____
 
 * **Load all products:**
 ```
-http://localhost:4300/api/products/
+http://localhost:4300/v1/products/
 ```
 ______
 

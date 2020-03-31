@@ -1,13 +1,13 @@
 module.exports = function(app, db) {
 
-  // Load products by ID: http://localhost:4300/api/product/id/$id
-  // example: http://localhost:4300/api/product/id/15
-  app.get('/api/product/:id', (req, res) => {
-    processData(res, "SELECT * FROM products where product_id == "+req.params.id);
+  // Load products by ID: http://localhost:5000/v1/product/id/$id
+  // example: http://localhost:5000/v1/product/id/15
+  app.get('/v1/product/:id', (req, res) => {
+    processData(res, "SELECT * FROM products WHERE product_id == " + req.params.id);
   });
 
-  // Load all products: http://localhost:4300/api/product/
-  app.get('/api/products', (req, res) => {
+  // Load all products: http://localhost:5000/v1/product/
+  app.get('/v1/products', (req, res) => {
     processData(res, "SELECT * FROM products");
   });
 
@@ -29,7 +29,7 @@ module.exports = function(app, db) {
     res.setHeader("Access-Control-Allow-Origin","*");
 
     if(data[0])
-      res.send(data);
+      res.status(200).send(data);
     else{
       res.status(404).send("Product not found");
     }

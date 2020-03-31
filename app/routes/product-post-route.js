@@ -1,20 +1,18 @@
 module.exports = function (app, db) {
     
     // Add new product
-    // http://localhost:4300/api/product
+    // http://localhost:5000/v1/product
     // Sending a JSON body:
     // {
-    //     "name": "ExampleProductName",
-    //     "description": "Example product description",
-    //     "price": 2.00,
-    //     "currency": "EUR" 
+    //     "name": "ExampleProductName"
+    //     "price": 2.00
     // }
 
     // or an array of products:
     // [
     //     {...},{...}
     // ]
-    app.post('/api/product/', (req, res) => {
+    app.post('/v1/product/', (req, res) => {
         res.setHeader("Access-Control-Allow-Origin", "*");
 
          var data = req.body;
@@ -39,15 +37,13 @@ function processProduct(req, res, db){
 
 function insertProduct(product, res, db){
     var name = product.name;
-    var description = product.description;
     var price = product.price;
-    var currency = product.currency;
 
-    var sql = `insert into Products (name, description, price, currency) 
+    var sql = `insert into Products (name, price) 
             VALUES 
-            (?, ?, ?, ?);`;
+            (?, ?);`;
 
-    var values = [name, description, price, currency];
+    var values = [name, price];
 
     db.serialize(function () {
         db.run(sql, values, function (err) {
@@ -57,7 +53,7 @@ function insertProduct(product, res, db){
             }
                 
             else
-                res.send();
+                res.status(200).send();
         });
     });
 }

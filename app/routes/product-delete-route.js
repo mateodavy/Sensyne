@@ -1,9 +1,9 @@
 module.exports = function (app, db) {
     
     // Delete a product
-    // http://localhost:4300/api/product
+    // http://localhost:5000/v1/product
     /*
-     app.delete('/api/product/', (req, res) => {
+     app.delete('/v1/product/', (req, res) => {
         res.setHeader("Access-Control-Allow-Origin", "*");
 
          var data = req.body;
@@ -15,7 +15,7 @@ module.exports = function (app, db) {
     });
     */
 
-    app.delete('/api/product/:id', (req, res) => {
+    app.delete('/v1/product/:id', (req, res) => {
         res.setHeader("Access-Control-Allow-Origin", "*");
 
         var id = req.params.id;
@@ -37,7 +37,7 @@ function processProduct(req, res, db){
 function deleteProduct(id, res, db){
 
     {
-        var sql = `delete from products where product_id = ?;`;
+        var sql = `DELETE FROM products WHERE product_id = ?;`;
         var values = [id];
 
         db.serialize(function () {
@@ -47,7 +47,7 @@ function deleteProduct(id, res, db){
                     res.status(500).send(err);
                 }
                 else
-                    res.send();
+                    res.status(200).send();
             });
         });
     }
